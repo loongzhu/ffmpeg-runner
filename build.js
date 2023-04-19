@@ -10,16 +10,16 @@ const EXENAME = process.env.BASE_EXENAME;
 
 // 创建 dist 下的 ffmpeg-start.vbs 文件 和 ffmpeg-stop.vbs 文件
 
-const startScript = `Set WshShell = CreateObject("WScript.Shell")
+const startVbs = `Set WshShell = CreateObject("WScript.Shell")
 cmds = WshShell.Run("${EXENAME}.exe", 0)
 Set WshShell = Nothing`;
 
 fs.writeFileSync(
   path.join(process.cwd(), "dist", `${EXENAME}-start.vbs`),
-  startScript
+  startVbs
 );
 
-const stopScript = `Set objWMIService = GetObject("winmgmts:\\\\.\\root\\cimv2")
+const stopVbs = `Set objWMIService = GetObject("winmgmts:\\\\.\\root\\cimv2")
 Set objShell = CreateObject("WScript.Shell")
 Set colProcessList = objWMIService.ExecQuery("SELECT * FROM Win32_Process WHERE Name = '${EXENAME}.exe'")
 
@@ -29,7 +29,26 @@ Next`;
 
 fs.writeFileSync(
   path.join(process.cwd(), "dist", `${EXENAME}-stop.vbs`),
-  stopScript
+  stopVbs
+);
+
+// 创建 dist 下的 ffmpeg-start.bat 文件 和 ffmpeg-stop.bat 文件
+
+const startBat = `@echo off
+taskkill /F /IM ${EXENAME}.exe`;
+
+fs.writeFileSync(
+  path.join(process.cwd(), "dist", `${EXENAME}-start.bat`),
+  startBat
+);
+
+const stopBat = `@echo off
+start /B "" "%COMSPEC%" /c start /B "" "${EXENAME}.exe"
+exit`;
+
+fs.writeFileSync(
+  path.join(process.cwd(), "dist", `${EXENAME}-stop.bat`),
+  stopBat
 );
 
 const script = `pkg main.js -d -t node16-win-x64 -o dist/${EXENAME}.exe`;
