@@ -1,0 +1,21 @@
+{
+  "name": "ffmpeg-runner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node main.js",
+    "copy": "node copy.js",
+    "pkg": "node build.js",
+    "build": "npm run copy && npm run pkg"
+  },
+  "keywords": [],
+  "author": "zhuzhenquan",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fs-extra": "^11.1.1",
+    "pkg": "^5.8.1"
+  }
+}
