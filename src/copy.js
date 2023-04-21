@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const process = require("process");
 const fse = require("fs-extra");
+const process = require("process");
 
 // 获取源文件
 const sourceFile = path.join(process.cwd(), ".env");
@@ -22,7 +22,7 @@ function copyFile() {
 }
 
 // 获取源文件夹
-const sourceFolder = path.join(process.cwd(), "./assets");
+const sourceFolder = path.join(process.cwd(), "./src/assets");
 
 // 获取目标文件夹
 const targetFolder = path.join(process.cwd(), "./dist/assets");

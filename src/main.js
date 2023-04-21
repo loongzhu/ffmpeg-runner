@@ -5,7 +5,7 @@ const script = require("./script.js");
 const child_process = require("child_process");
 
 // 获取 ffmpeg 路径
-const ffmpegPath = path.join(process.cwd(), "/assets");
+const ffmpegPath = path.join(process.cwd(), "./src/assets");
 
 // 执行 命令
 const ffmpeg = child_process.exec(
