@@ -13,6 +13,7 @@ const NAME = process.env.BSAE_NAME;
 // ffmpeg -f gdigrab -r 30 -i desktop screen.avi  录制屏幕 avi格式
 // ffmpeg -f gdigrab -r 30 -i desktop -vcodec mpeg4 out.mp4  录制固定格式的mp4 win10播放器可播放
 // ffmpeg -i screen.avi -c copy -map 0 video.mp4  avi 转 mp4
+// ffmpeg -i input.avi -vcodec h264 output.mp4
 
 const script = `ffmpeg -f gdigrab -i desktop -pix_fmt yuv420p -c:v libx264 -preset ultrafast -b:v 600k -c:a aac -b:a 160k -f rtsp rtsp://${IP}:${PORT}/${NAME}`;
 
