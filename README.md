@@ -1,6 +1,6 @@
 # ffmpeg-runner
 
-ffmpeg-runner is a Python-based command-line tool that simplifies the execution of FFMpeg commands by providing a YAML-based configuration file and a template-based syntax for specifying input and output files.
+ffmpeg-runner is a simple tool based on Node.js that builds an .exe file capable of executing FFMpeg command-line commands.
 
 ## Usage
 
