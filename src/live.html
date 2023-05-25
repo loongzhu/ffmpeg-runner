@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live Streaming</title>
+    <style>
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #videoElement {
+        width: 80%;
+        padding: 10px;
+        background-color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="videoElement" autoplay muted></video>
+
+    <script src="https://cdn.bootcss.com/flv.js/1.4.0/flv.min.js"></script>
+
+    <script>
+      const liveUrl = "http://127.0.0.1:8000/live/video.flv"; // 此链接对应后面的 ffmpeg 命令参数
+      const playerDom = document.getElementById("videoElement");
+
+      if (flvjs.isSupported) {
+        player = flvjs.createPlayer(
+          {
+            type: "flv",
+            isLive: true,
+            hasAudio: false,
+            hasVideo: true,
+            url: liveUrl,
+            cors: true,
+          },
+          {
+            enableWorker: false,
+            lazyLoadMaxDuration: 3 * 60,
+            seekType: "range",
+          }
+        );
+        player.attachMediaElement(playerDom);
+        player.load();
+      } else {
+        console.log("Your browser is not support flv.js");
+      }
+    </script>
+  </body>
+</html>
