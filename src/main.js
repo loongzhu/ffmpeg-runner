@@ -1,21 +1,28 @@
-const fs = require("fs");
+const http = require("http");
 const path = require("path");
 const process = require("process");
 const script = require("./script.js");
 const child_process = require("child_process");
 
-// 获取 ffmpeg 路径
-const ffmpegPath = path.join(process.cwd(), "./src/assets");
+const server = http.createServer((req, res) => {});
 
-console.log("🚀 ~ script:", script);
+server.listen(8528, async () => {
+  const node_env = process.env.NODE_ENV;
 
-// 执行 命令
-const ffmpeg = child_process.exec(
-  script,
-  { cwd: ffmpegPath },
-  (error, stdout, stderr) => {
-    if (error) return console.error(`exec error: ${error}`);
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-  }
-);
+  const filePath = node_env === "development" ? "./src/assets" : "./assets";
+
+  const ffmpegPath = path.join(process.cwd(), filePath);
+
+  console.log("execute script:", script);
+
+  // 执行 命令
+  const ffmpeg = await child_process.exec(
+    script,
+    { cwd: ffmpegPath },
+    (error, stdout, stderr) => {
+      if (error) return console.error(`exec error: ${error}`);
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    }
+  );
+});
