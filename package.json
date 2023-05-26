@@ -9,7 +9,8 @@
     "convert": "node ./src/convert.js",
     "copy": "node ./src/copy.js",
     "pkg": "node ./src/build.js",
-    "build": "npm run copy && npm run pkg"
+    "build:main": "npm run copy && npm run pkg",
+    "build:convert": "node ./src/build-convert.js"
   },
   "keywords": [
     "ffmpeg"
