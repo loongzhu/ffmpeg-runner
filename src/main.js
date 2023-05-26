@@ -1,10 +1,15 @@
+const fs = require("fs");
 const http = require("http");
 const path = require("path");
 const process = require("process");
 const script = require("./script.js");
 const child_process = require("child_process");
 
-const server = http.createServer((req, res) => {});
+const server = http.createServer((req, res) => {
+  const filePath = path.join(path.join(process.cwd(), "live.html"));
+  const readStream = fs.createReadStream(filePath);
+  readStream.pipe(res);
+});
 
 server.listen(8528, async () => {
   const node_env = process.env.NODE_ENV;
@@ -25,4 +30,6 @@ server.listen(8528, async () => {
       console.log(`stderr: ${stderr}`);
     }
   );
+
+  console.log("Server listening on port http://127.0.0.1:8528");
 });
