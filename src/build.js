@@ -51,7 +51,7 @@ fs.writeFileSync(
   stopBat
 );
 
-const script = `pkg main.js -d -t node16-win-x64 -o dist/${EXENAME}.exe`;
+const script = `pkg ./src/main.js -d -t node16-win-x64 -o dist/${EXENAME}.exe`;
 
 const build = child_process.exec(script, (error, stdout, stderr) => {
   if (error) return console.error(`exec error: ${error}`);
